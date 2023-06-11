@@ -50,7 +50,7 @@ const initialState = {
           "https://cdn.motor1.com/images/mgl/y2PgRq/s1/2024-porsche-cayenne.jpg",
         ],
         tarih: "",
-        yorumlar:{}
+        yorumlar:[]
       },
       {
         id: uuidv4(),

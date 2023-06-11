@@ -153,7 +153,7 @@ const Header = () => {
 
 
               >
-                <MenuItem onClick={handleClose}><Link className="text-amber-600  hover:text-purple-500 hover:border-b-2 hover:border-purple-500 font-semibold   border-stone-500 md:border-r-0 " to={"/teknoloji_Urunler"}>TEKNOLOJİ</Link></MenuItem>
+                <MenuItem onClick={handleClose}><Link className="text-amber-600  hover:text-purple-500 hover:border-b-8 hover:border-purple-500 font-semibold   border-stone-500 md:border-r-0 " to={"/teknoloji_Urunler"}>TEKNOLOJİ</Link></MenuItem>
                 <MenuItem onClick={handleClose}> <Link className="text-amber-600 hover:text-purple-500 hover:border-b-2 hover:border-purple-500 font-semibold  border-stone-500 md:border-r-0   " to={"/ev_aleti_Urunler"}>EV-ALETLERİ</Link></MenuItem>
                 <MenuItem onClick={handleClose}>  <Link className="text-amber-600  hover:text-purple-500 hover:border-b-2 hover:border-purple-500 font-semibold  border-stone-500 md:border-r-0 " to={"/yemek_Urunler"}>YEMEKLER</Link></MenuItem>
                 <MenuItem onClick={handleClose}>  <Link className="text-amber-600 hover:text-purple-500 hover:border-b-2 hover:border-purple-500 font-semibold  border-stone-500 md:border-r-0  " to={"/araba_Urunler"}>ARABALAR</Link></MenuItem>

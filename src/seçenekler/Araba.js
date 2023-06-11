@@ -1,25 +1,50 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { sepeteEkle , istekListesineEkleButton } from '../redux/urunlerSlice';
+import { sepeteEkle, istekListesineEkleButton } from '../redux/urunlerSlice';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import TextField from '@mui/material/TextField';
+
 
 
 const Araba = () => {
 
-  const arabalar= useSelector((state) => state.urunler.ürünler.araba_Ürünler );
+  const [searchTerm, setSearchTerm] = useState(''); //bu state içine girilen yazıları atılacak
+
+  const arabalar = useSelector((state) => state.urunler.ürünler.araba_Ürünler);
 
   const dispatch = useDispatch();
+
+
+
   return (
     <div className="bg-stone-50" >
 
-    <div className=" grid grid-rows-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-2  mr-2 ml-2">
-      {arabalar.map((urun) => (
-        <div className=" group rounded-md shadow-lg shadow-gray-400  hover:rounded-lg    mt-2 mr-2 ml-2 mb-4   border border-gray-200  " key={urun.id}>
-          <h2 className=" uppercase italic border-b underline underline-offset-2 text-center text-2xl text-stone-500">{urun.productName}</h2>
-          <img className=" w-48 h-36 mx-auto sm:w-96 sm:h-48 m-3  object-contain object-center group-hover:scale-110 group-hover:opacity-75 duration-1000 rounded-2xl" src={urun.img}></img>
-          <p className='truncate text-center text-lg'>Fiyat: {urun.price}$</p>
-          <p className="text-center truncate">{urun.productDescription}</p>
-          {/* <div className="flex justify-between">  burası productionDetails sayfasına gönderildi 
+
+      <div className="flex justify-center mt-5 mb-5">
+      <TextField
+      sx={{width:"300px"}}
+      color="success"
+          id="standard-search"
+          label="Ürün Aratınız..."
+          type="search"
+          onChange={(event) => setSearchTerm(event.target.value)} // burada girilen yazılar state içine atılıyor onChange ile girilen her terim ile çalışıyor fonksiyon
+          variant="standard"
+        />
+      </div>
+
+      <div className=" grid grid-rows-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-2  mr-2 ml-2">
+        
+     {/* girişte redux içinden gelen verileri filtreliyoruz ürün ismine göre ardından her ürün ismini küçük harfe çeviriyoruz includes metodu ile 
+     oluşturduğumuz state içinde bu ürün ismi ile aynı isim var ise (o state içindekilerde küçük harfe çevriliyor) filter metodu sayesinde sadece o görünür yoksa ürünlern tamamı görünür  */}   
+     {arabalar.filter((urun) => urun.productName.toLowerCase().includes(searchTerm.toLowerCase())).map((urun) => (
+          <div className=" group rounded-md shadow-lg shadow-gray-400  hover:rounded-lg    mt-2 mr-2 ml-2 mb-4   border border-gray-200  " key={urun.id}>
+            <h2 className=" uppercase italic border-b underline underline-offset-2 text-center text-2xl text-stone-500">{urun.productName}</h2>
+            <img className=" w-48 h-36 mx-auto sm:w-96 sm:h-48 m-3  object-contain object-center group-hover:scale-110 group-hover:opacity-75 duration-1000 rounded-2xl" src={urun.img}></img>
+            <p className='truncate text-center text-lg'>Fiyat: {urun.price}$</p>
+            <p className="text-center truncate">{urun.productDescription}</p>
+
+            {/* <div className="flex justify-between">  burası productionDetails sayfasına gönderildi 
             <button onClick={() => dispatch(sepeteEkle(urun))} className="bg-yellow-400 flex items-center truncate font-medium font-custom  hover:ring-2 hover:ring-orange-300 hover:bg-transparent hover:text-orange-30 hover:shadow-md hover:text-orange-300 hover:shadow-orange-400  focus:ring text-white rounded-md p-1 m-2" > <lord-icon
               src="https://cdn.lordicon.com/cllunfud.json"
               trigger="hover"
@@ -34,15 +59,15 @@ const Araba = () => {
             </lord-icon>istek listesine al</button>
           </div> */}
 
-          <div className="flex justify-center items-center m-3">
-            <button className=" text-white bg-amber-400 rounded-lg p-2"><Link to={`/product/${urun.id}`}>ayrıntılı bak</Link></button>
+            <div className="flex justify-center items-center m-3">
+              <button className=" text-white bg-amber-400 rounded-lg p-2"><Link to={`/product/${urun.id}`}>ayrıntılı bak</Link></button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+
+      </div>
 
     </div>
-
-  </div>
   )
 }
 

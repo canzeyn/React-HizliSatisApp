@@ -2,10 +2,14 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { sepeteEkle, istekListesineEkleButton } from '../redux/urunlerSlice';
 import { Link } from 'react-router-dom';
-import {BsFillEyeFill} from "react-icons/bs"
+import { BsFillEyeFill } from "react-icons/bs"
+import { useState } from 'react';
+import TextField from '@mui/material/TextField';
 
 
 const Yemek = () => {
+
+  const [searchTerm, setSearchTerm] = useState('');
 
   const yemekler = useSelector((state) => state.urunler.ürünler.yemek_Ürünler);
 
@@ -13,8 +17,20 @@ const Yemek = () => {
   return (
     <div className="bg-stone-50" >
 
+      <div className="flex justify-center mt-5 mb-5">
+        <TextField
+          sx={{ width: "300px" }}
+          color="success"
+          id="standard-search"
+          label="Ürün Aratınız..."
+          type="search"
+          onChange={(event) => setSearchTerm(event.target.value)}
+          variant="standard"
+        />
+      </div>
+
       <div className=" grid grid-rows-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-2  mr-2 ml-2">
-        {yemekler.map((urun) => (
+        {yemekler.filter((urun) => urun.productName.toLowerCase().includes(searchTerm.toLowerCase())).map((urun) => (
           <div className=" group rounded-md shadow-lg shadow-gray-400  hover:rounded-lg    mt-2 mr-2 ml-2 mb-4   border border-gray-200  " key={urun.id}>
             <h2 className=" uppercase italic border-b underline underline-offset-2 text-center text-2xl text-stone-500">{urun.productName}</h2>
             <img className=" w-48 h-36 mx-auto sm:w-96 sm:h-48 m-3 object-contain object-center group-hover:scale-110 group-hover:opacity-75 duration-1000 rounded-2xl" src={urun.img}></img>

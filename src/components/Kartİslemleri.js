@@ -130,7 +130,6 @@ const Kartİslemleri = () => {
             </div>
           ))}
         </div>
-
         {/* kredi kartı bilgileri buradan alınacak */}
 
 
